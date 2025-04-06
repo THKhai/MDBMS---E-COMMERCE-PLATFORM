@@ -1,0 +1,66 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bin/
+obj/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+
+# User-specific files
+*.sln.ide
+*.sln.docstates
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Other files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pdb
+*.cache
+*.ilk
+*.idb
+*.ipch/
+*.aps
+*.pch
+*.pdb
+*.obj
+*.sbr
+*.scc
+*.tlog/
+*.log
+*.vspscc
+*.vssscc
+
+# Publish folder
+publish/
+
+/repository/data_base_log
