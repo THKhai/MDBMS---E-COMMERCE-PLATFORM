@@ -3,18 +3,26 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"  
+    container_name: redis_container
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
     volumes:
-      - ./repository/data_base_log/redis_data:/data 
+      - ./repository/data_base_log/redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 
   mongo:
     image: mongo:latest
     ports:
       - "27017:27017"  
+    container_name: mongo_container
     logging:
       driver: "json-file"
       options:
@@ -22,11 +30,18 @@ services:
         max-file: "3"
     volumes:
       - ./repository/data_base_log/mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 
   cassandra:
     image: cassandra:latest
     ports:
       - "9042:9042"  
+    container_name: cassandra_container
     logging:
       driver: "json-file"
       options:
@@ -34,12 +49,19 @@ services:
         max-file: "3"
     volumes:
       - ./repository/data_base_log/cassandra_data:/var/lib/cassandra
+    healthcheck:
+      test: ["CMD", "cqlsh", "-e", "describe keyspaces"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
 
   neo4j:
     image: neo4j:latest
     ports:
       - "7474:7474"  
       - "7687:7687"  
+    container_name: neo4j_container
     environment:
       - NEO4J_AUTH=neo4j/superadmin  
       - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
@@ -50,3 +72,10 @@ services:
         max-file: "3"
     volumes:
       - ./repository/data_base_log/neo4j_data:/data
+    healthcheck:
+      test: ["CMD", "cypher-shell", "-u", "neo4j", "-p", "superadmin", "RETURN 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
