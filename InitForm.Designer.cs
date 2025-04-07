@@ -39,7 +39,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.InitForm_Load);
             this.ResumeLayout(false);
-
         }
 
         #endregion
