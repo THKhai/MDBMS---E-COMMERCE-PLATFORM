@@ -79,6 +79,5 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 - Toàn Từ
 - Trần Hoàng Khải
 - Bùi Chí Khang
-- Từ Phước Toàn
 - Lý Đăng Khoa
 
