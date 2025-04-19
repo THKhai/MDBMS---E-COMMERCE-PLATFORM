@@ -135,12 +135,17 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             string email = Get_email();
             // Khi nút Add to Cart được nhấn, mở form AddToCart
             Console.WriteLine(email);
-            Cart addToCartForm = new Cart(email);
+            Product addToCartForm = new Product(email);
             addToCartForm.ShowDialog(); // Dùng ShowDialog để mở form giỏ hàng như một modal dialog
         }
 
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

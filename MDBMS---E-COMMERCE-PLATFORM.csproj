@@ -139,15 +139,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form\Cart.cs">
+    <Compile Include="Form\Product.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Cart.Designer.cs">
-      <DependentUpon>Cart.cs</DependentUpon>
+    <Compile Include="Form\Product.Designer.cs">
+      <DependentUpon>Product.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\Home.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Form\Home.cs" />
     <Compile Include="Form\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
@@ -181,8 +179,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form\Cart.resx">
-      <DependentUpon>Cart.cs</DependentUpon>
+    <EmbeddedResource Include="Form\Product.resx">
+      <DependentUpon>Product.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
@@ -234,6 +232,7 @@
     <Content Include=".gitignore" />
     <Content Include="repository\migration_scripts\mongoDB\V.0_0_0.js" />
     <Content Include="repository\migration_scripts\mongoDB\V.0_0_1.js" />
+    <Content Include="repository\migration_scripts\mongoDB\v.0_0_2.js" />
     <Content Include="Resources\e_commerce.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

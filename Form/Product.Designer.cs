@@ -2,7 +2,7 @@
 
 namespace MDBMS___E_COMMERCE_PLATFORM
 {
-    partial class Cart
+    partial class Product
     {
         /// <summary>
         /// Required designer variable.

@@ -6,7 +6,7 @@ using MongoDB.Driver;
 
 namespace MDBMS___E_COMMERCE_PLATFORM
 {
-    public partial class Cart : Form
+    public partial class Product : Form
     {
         private readonly IMongoCollection<BsonDocument> _productCollection;
         private readonly IMongoCollection<BsonDocument> _customerCollection;
@@ -14,11 +14,11 @@ namespace MDBMS___E_COMMERCE_PLATFORM
         private readonly IDatabase _redisDatabase;
         private string userEmail;
         
-        public Cart()
+        public Product()
         {
             InitializeComponent();
         }
-        public Cart(string email)
+        public Product(string email)
         {
             InitializeComponent();
             userEmail = email;  // Gán email từ form Home
