@@ -129,5 +129,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             this.Close();
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
