@@ -30,6 +30,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             if (parts.Length > 2)
             {
                 string email = parts[2];
+                Console.WriteLine("Email extracted from session key: " + email);
                 return email;
             }
             else
@@ -128,6 +129,16 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             login.ShowDialog();
             this.Close();
         }
+        // Chuyển qua form Sản phẩm
+        private void btnAddToCart_Click(object sender, EventArgs e)
+        {
+            string email = Get_email();
+            // Khi nút Add to Cart được nhấn, mở form AddToCart
+            Console.WriteLine(email);
+            Cart addToCartForm = new Cart(email);
+            addToCartForm.ShowDialog(); // Dùng ShowDialog để mở form giỏ hàng như một modal dialog
+        }
+
 
     }
 }

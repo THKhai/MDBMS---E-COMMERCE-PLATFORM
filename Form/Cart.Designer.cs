@@ -121,6 +121,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             this.btnClick1.TabIndex = 1;
             this.btnClick1.Text = "Thêm vào giỏ hàng";
             this.btnClick1.UseVisualStyleBackColor = true;
+            this.btnClick1.Click += new System.EventHandler(this.btnAddToCart_Click);
             // 
             // nudQuantity
             // 
