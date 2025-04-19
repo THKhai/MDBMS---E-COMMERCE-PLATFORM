@@ -126,3 +126,5 @@ db.products.insertMany([
         }
     }
 ]);
+
+db.products.find()
