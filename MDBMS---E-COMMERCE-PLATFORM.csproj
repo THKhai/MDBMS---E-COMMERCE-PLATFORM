@@ -173,6 +173,18 @@
     <Compile Include="Form\Seller_Profile.Designer.cs">
       <DependentUpon>Seller_Profile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\Shop\Invoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Shop\Invoice.Designer.cs">
+      <DependentUpon>Invoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Shop\Storage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Shop\Storage.Designer.cs">
+      <DependentUpon>Storage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\Sign_up.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,7 +256,9 @@
     <Content Include="repository\migration_scripts\mongoDB\V.0_0_0.js" />
     <Content Include="repository\migration_scripts\mongoDB\V.0_0_1.js" />
     <Content Include="repository\migration_scripts\mongoDB\v.0_0_2.js" />
+    <Content Include="Resources\home_personal.png" />
     <Content Include="Resources\e_commerce.jpg" />
+    <Content Include="Resources\home_shop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
