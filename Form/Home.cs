@@ -26,13 +26,8 @@ namespace MDBMS___E_COMMERCE_PLATFORM
         {
             Home.Key = key;
             InitializeComponent();
-            GetCustomer();
-            this.IsSeller = HasShop(Customer);
-            this.CurrentPage = HomePage.PersonalManagement;
-            this.UpdatePage(this.CurrentPage);
             // Ngăn thay đổi kích thước form
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-
             // Vô hiệu hóa nút phóng to
             this.MaximizeBox = false;
         }
@@ -106,6 +101,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM
         // Method to toggle the textbox readonly property
         private void Home_Load(object sender, EventArgs e)
         {
+            GetCustomer();
+            this.IsSeller = HasShop(Customer);
+            this.CurrentPage = HomePage.PersonalManagement;
             try
             {
                 UpdatePage(this.CurrentPage);
@@ -142,12 +140,13 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Shomething went wrong {ex.Message}");
+                MessageBox.Show($"Something went wrong {ex.Message}");
             }
         }
 
         private void label4_Click(object sender, EventArgs e)
         {
+
             if (this.IsSeller)
             {
                 var seller = new Seller_Profile(Customer);
@@ -159,6 +158,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM
                 personal.ShowDialog();
                 label4.Text = Customer["Name"].AsString;
             }
+            this.Home_Load(sender, e);
         }
 
         private void label3_Click(object sender, EventArgs e)
