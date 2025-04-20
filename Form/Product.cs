@@ -55,6 +55,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM
 
             return ObjectId.Empty; // Nếu không tìm thấy người dùng
         }
+        
         private void FormAddToCart_Load(object sender, EventArgs e)
         {
             LoadProductList();
@@ -65,11 +66,13 @@ namespace MDBMS___E_COMMERCE_PLATFORM
         {
             dgvProducts.Rows.Clear();
             var products = _productCollection.Find(new BsonDocument()).ToList();
-
             // Duyệt qua tất cả sản phẩm và thêm vào DataGridView
             foreach (var product in products)
             {
                 // Lấy các thông tin cơ bản của sản phẩm
+                string id = product.GetValue("_id", "").ToString();
+                //Console.WriteLine(id);
+
                 string name = product.GetValue("name", "").AsString;
                 string category = product.GetValue("category", "").AsString;
                 string price = product.GetValue("price", 0).ToString();
@@ -88,7 +91,8 @@ namespace MDBMS___E_COMMERCE_PLATFORM
                 // string storage = attributes.Contains("storage") ? attributes["storage"].ToString() : "";
 
                 // Thêm dòng vào DataGridView với các cột attribute
-                dgvProducts.Rows.Add(name, category, price, size, color, material, brand, warranty);
+                dgvProducts.Rows.Add(id, name, category, price, size, color, material, brand, warranty);
+                //dgvProducts.Columns["id"].Visible = false;
             }
 
             dgvProducts.ClearSelection();
@@ -101,8 +105,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             {
                 Console.WriteLine("khoa beo 2");
 
-                string name = dgvProducts.CurrentRow.Cells[0].Value.ToString();
-                int price = Convert.ToInt32(dgvProducts.CurrentRow.Cells[2].Value);
+                string id = dgvProducts.CurrentRow.Cells[0].Value.ToString();
+                string name = dgvProducts.CurrentRow.Cells[1].Value.ToString();
+                int price = Convert.ToInt32(dgvProducts.CurrentRow.Cells[3].Value);
                 int quantity = (int)nudQuantity.Value;
                 Console.WriteLine("khoa beo 3");
 
@@ -123,7 +128,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM
                         var cartKey = "cart:" + userId.ToString();
 
                         // Thêm sản phẩm vào giỏ hàng trong Redis
-                        _redisDatabase.HashIncrement(cartKey, name, quantity);
+                        _redisDatabase.HashIncrement(cartKey, id, quantity);
 
                         MessageBox.Show($"Đã thêm: {name} x{quantity} = {price * quantity:N0}đ", 
                             "Thêm vào giỏ hàng", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -142,6 +147,11 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             {
                 MessageBox.Show("Vui lòng chọn sản phẩm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
     }
 }

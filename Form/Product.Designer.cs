@@ -31,7 +31,10 @@ namespace MDBMS___E_COMMERCE_PLATFORM
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnClick1 = new System.Windows.Forms.Button();
+            this.nudQuantity = new System.Windows.Forms.NumericUpDown();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,22 +43,47 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             this.colBrand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWarranty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnClick1 = new System.Windows.Forms.Button();
-            this.nudQuantity = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.SuspendLayout();
+            // 
+            // btnClick1
+            // 
+            this.btnClick1.Location = new System.Drawing.Point(871, 294);
+            this.btnClick1.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClick1.Name = "btnClick1";
+            this.btnClick1.Size = new System.Drawing.Size(152, 60);
+            this.btnClick1.TabIndex = 1;
+            this.btnClick1.Text = "Thêm vào giỏ hàng";
+            this.btnClick1.UseVisualStyleBackColor = true;
+            this.btnClick1.Click += new System.EventHandler(this.btnAddToCart_Click);
+            // 
+            // nudQuantity
+            // 
+            this.nudQuantity.Location = new System.Drawing.Point(45, 294);
+            this.nudQuantity.Margin = new System.Windows.Forms.Padding(4);
+            this.nudQuantity.Name = "nudQuantity";
+            this.nudQuantity.Size = new System.Drawing.Size(160, 22);
+            this.nudQuantity.TabIndex = 2;
             // 
             // dgvProducts
             // 
             this.dgvProducts.AllowUserToDeleteRows = false;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.colProductName, this.colCategory, this.colPrice, this.colSize, this.colColor, this.colBrand, this.colMaterial, this.colWarranty });
-            this.dgvProducts.Location = new System.Drawing.Point(34, 34);
+            this.dgvProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.ID, this.colProductName, this.colCategory, this.colPrice, this.colSize, this.colColor, this.colBrand, this.colMaterial, this.colWarranty });
+            this.dgvProducts.Location = new System.Drawing.Point(45, 42);
+            this.dgvProducts.Margin = new System.Windows.Forms.Padding(4);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.ReadOnly = true;
-            this.dgvProducts.Size = new System.Drawing.Size(733, 199);
+            this.dgvProducts.Size = new System.Drawing.Size(977, 245);
             this.dgvProducts.TabIndex = 0;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
             // 
             // colProductName
             // 
@@ -113,54 +141,38 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             this.colWarranty.ReadOnly = true;
             this.colWarranty.Width = 80;
             // 
-            // btnClick1
+            // Product
             // 
-            this.btnClick1.Location = new System.Drawing.Point(653, 239);
-            this.btnClick1.Name = "btnClick1";
-            this.btnClick1.Size = new System.Drawing.Size(114, 49);
-            this.btnClick1.TabIndex = 1;
-            this.btnClick1.Text = "Thêm vào giỏ hàng";
-            this.btnClick1.UseVisualStyleBackColor = true;
-            this.btnClick1.Click += new System.EventHandler(this.btnAddToCart_Click);
-            // 
-            // nudQuantity
-            // 
-            this.nudQuantity.Location = new System.Drawing.Point(34, 239);
-            this.nudQuantity.Name = "nudQuantity";
-            this.nudQuantity.Size = new System.Drawing.Size(120, 20);
-            this.nudQuantity.TabIndex = 2;
-            // 
-            // Cart
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.nudQuantity);
             this.Controls.Add(this.btnClick1);
             this.Controls.Add(this.dgvProducts);
-            this.Name = "Cart";
-            this.Text = "Cart";
+            this.Location = new System.Drawing.Point(15, 15);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "Product";
             this.Load += new System.EventHandler(this.FormAddToCart_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.ResumeLayout(false);
         }
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSize;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colColor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBrand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+
+        private System.Windows.Forms.NumericUpDown nudQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWarranty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBrand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colColor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
+        private System.Windows.Forms.DataGridView dgvProducts;
 
         private System.Windows.Forms.Button btnClick1;
-        private System.Windows.Forms.NumericUpDown nudQuantity;
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
-
-        private System.Windows.Forms.DataGridView dgvProducts;
 
         #endregion
     }
