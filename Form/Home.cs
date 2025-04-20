@@ -43,6 +43,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             {
                 case HomePage.PersonalManagement:
                     // Chuyển đến trang quản lý cá nhân
+                    this.pictureBox1.Image = Properties.Resources.home_personal;
                     this.button1.Text = "Sản phẩm";
                     this.button2.Text = "Giỏ hàng của tôi";
                     this.button3.Text = "Chuyển sang trang shop";
@@ -51,6 +52,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM
                     break;
                 case HomePage.ShopManagement:
                     // Chuyển đến trang quản lý shop
+                    this.pictureBox1.Image = Properties.Resources.home_shop;
                     this.button1.Text = "Quản lý kho hàng";
                     this.button2.Text = "Hóa đơn của tôi";
                     this.button3.Text = "Chuyển sang trang cá nhân";
