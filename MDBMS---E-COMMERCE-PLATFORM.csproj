@@ -173,6 +173,18 @@
     <Compile Include="Form\Seller_Profile.Designer.cs">
       <DependentUpon>Seller_Profile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\Shop\Invoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Shop\Invoice.Designer.cs">
+      <DependentUpon>Invoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Shop\Storage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Shop\Storage.Designer.cs">
+      <DependentUpon>Storage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\Sign_up.cs">
       <SubType>Form</SubType>
     </Compile>
