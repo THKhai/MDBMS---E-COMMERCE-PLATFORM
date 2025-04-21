@@ -1,14 +1,13 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
-using StackExchange.Redis;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Data;
-using System.Drawing;
+using StackExchange.Redis;
 
-namespace MDBMS___E_COMMERCE_PLATFORM
+namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
-    public partial class Cart : Form
+    public partial class Cart : System.Windows.Forms.Form
     {
         private readonly IMongoCollection<BsonDocument> _productCollection;
         private readonly IMongoCollection<BsonDocument> _customerCollection;
@@ -44,7 +43,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             if (userId != ObjectId.Empty)
             {
                 cartKey = "cart:" + userId.ToString();
-                Console.WriteLine("Cart key: " + cartKey);
+                Console.WriteLine(@"Cart key: " + cartKey);
             }
             else
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MDBMS___E_COMMERCE_PLATFORM.Form;
 
 namespace MDBMS___E_COMMERCE_PLATFORM
 {

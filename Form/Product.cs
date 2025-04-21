@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
-using StackExchange.Redis;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using StackExchange.Redis;
 
-namespace MDBMS___E_COMMERCE_PLATFORM
+namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
-    public partial class Product : Form
+    public partial class Product : System.Windows.Forms.Form
     {
         private readonly IMongoCollection<BsonDocument> _productCollection;
         private readonly IMongoCollection<BsonDocument> _customerCollection;

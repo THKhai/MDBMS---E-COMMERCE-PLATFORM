@@ -3,9 +3,9 @@ using System.Windows.Forms;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace MDBMS___E_COMMERCE_PLATFORM
+namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
-    public partial class sign_up_seller : Form
+    public partial class sign_up_seller : System.Windows.Forms.Form
     {
         public static string Key { get; set; }
         

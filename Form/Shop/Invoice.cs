@@ -1,9 +1,8 @@
-﻿using System.Windows.Forms;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 
-namespace MDBMS___E_COMMERCE_PLATFORM
+namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
 {
-    public partial class Invoice : Form
+    public partial class Invoice : System.Windows.Forms.Form
     {
         public Invoice(string email, MongoClient client)
         {

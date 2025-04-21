@@ -1,12 +1,12 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using MongoDB.Driver;
 using MongoDB.Bson;
-using StackExchange.Redis;
-namespace MDBMS___E_COMMERCE_PLATFORM
+using MongoDB.Driver;
+
+namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
-    public partial class Sign_up : Form
+    public partial class Sign_up : System.Windows.Forms.Form
     {
         public Sign_up()
         {

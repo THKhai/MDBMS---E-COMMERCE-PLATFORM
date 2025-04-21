@@ -1,10 +1,12 @@
 using System;
+using System.Globalization;
 using System.Windows.Forms;
+using MDBMS___E_COMMERCE_PLATFORM.Form.Shop;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using StackExchange.Redis;
 
-namespace MDBMS___E_COMMERCE_PLATFORM
+namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
     public enum HomePage
     {
@@ -12,7 +14,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM
         ShopManagement,
     }
 
-    public partial class Home : Form
+    public partial class Home : System.Windows.Forms.Form
     {
         public static string Key { get; set; }
         private BsonDocument Customer { get; set; }
@@ -44,19 +46,19 @@ namespace MDBMS___E_COMMERCE_PLATFORM
                 case HomePage.PersonalManagement:
                     // Chuyển đến trang quản lý cá nhân
                     this.pictureBox1.Image = Properties.Resources.home_personal;
-                    this.button1.Text = "Sản phẩm";
-                    this.button2.Text = "Giỏ hàng của tôi";
-                    this.button3.Text = "Chuyển sang trang shop";
-                    this.label6.Text = "Tài khoản cá nhân";
+                    this.button1.Text = @"Sản phẩm";
+                    this.button2.Text = @"Giỏ hàng của tôi";
+                    this.button3.Text = @"Chuyển sang trang shop";
+                    this.label6.Text = @"Tài khoản cá nhân";
                     label4.Text = Customer["Name"].AsString;
                     break;
                 case HomePage.ShopManagement:
                     // Chuyển đến trang quản lý shop
                     this.pictureBox1.Image = Properties.Resources.home_shop;
-                    this.button1.Text = "Quản lý kho hàng";
-                    this.button2.Text = "Hóa đơn của tôi";
-                    this.button3.Text = "Chuyển sang trang cá nhân";
-                    this.label6.Text = "Tài khoản shop";
+                    this.button1.Text = @"Quản lý kho hàng";
+                    this.button2.Text = @"Hóa đơn của tôi";
+                    this.button3.Text = @"Chuyển sang trang cá nhân";
+                    this.label6.Text = @"Tài khoản shop";
                     label4.Text = Customer["Seller_profile"]["Name"].AsString;
                     break;
                 default:
@@ -73,12 +75,12 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             if (parts.Length > 2)
             {
                 string email = parts[2];
-                Console.WriteLine("Email extracted from session key: " + email);
+                Console.WriteLine(@"Email extracted from session key: " + email);
                 return email;
             }
             else
             {
-                MessageBox.Show("Invalid session key format.");
+                MessageBox.Show(@"Invalid session key format.");
             }
 
             return "";
@@ -96,7 +98,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Something went wrong {e.Message}");
+                MessageBox.Show($@"Something went wrong {e.Message}");
             }
         }
 
@@ -121,7 +123,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Something went wrong {ex.Message}");
+                MessageBox.Show($@"Something went wrong {ex.Message}");
             }
         }
 
@@ -137,12 +139,12 @@ namespace MDBMS___E_COMMERCE_PLATFORM
                 // Update the session in Redis
                 db.HashSet(Key, new HashEntry[]
                 {
-                    new HashEntry("closed_at", DateTime.UtcNow.ToString())
+                    new HashEntry("closed_at", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture))
                 });
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Something went wrong {ex.Message}");
+                MessageBox.Show($@"Something went wrong {ex.Message}");
             }
         }
 
@@ -189,11 +191,6 @@ namespace MDBMS___E_COMMERCE_PLATFORM
                 var storagePage = new Storage(email, this.MongoClient);
                 storagePage.ShowDialog();
             }
-        }
-
-
-        private void label1_Click(object sender, EventArgs e)
-        {
         }
 
         private void button2_Click(object sender, EventArgs e)

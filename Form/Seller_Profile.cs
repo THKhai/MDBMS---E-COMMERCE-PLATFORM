@@ -3,9 +3,9 @@ using System.Windows.Forms;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace MDBMS___E_COMMERCE_PLATFORM
+namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
-    public partial class Seller_Profile : Form
+    public partial class Seller_Profile : System.Windows.Forms.Form
     {
         public static BsonDocument Seller { get; set; }
         public static Boolean isEdit = false;

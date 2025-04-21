@@ -4,9 +4,10 @@ using System.Windows.Forms;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using StackExchange.Redis;
-namespace MDBMS___E_COMMERCE_PLATFORM
+
+namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
-    public partial class InitForm : Form
+    public partial class InitForm : System.Windows.Forms.Form
     {
         public static string key {get; set; }
         public InitForm()

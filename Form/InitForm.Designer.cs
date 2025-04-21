@@ -1,4 +1,4 @@
-﻿namespace MDBMS___E_COMMERCE_PLATFORM
+﻿namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
     partial class InitForm
     {
