@@ -19,7 +19,6 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
         private static string Key { get; set; }
         private BsonDocument Customer { get; set; }
         private bool IsSeller { get; set; }
-
         private MongoClient MongoClient { get; set; }
         private ConnectionMultiplexer RedisClient { get; set; }
         private HomePage CurrentPage { get; set; }

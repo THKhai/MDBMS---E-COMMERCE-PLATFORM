@@ -18,6 +18,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 
             // Vô hiệu hóa nút phóng to
             this.MaximizeBox = false;
+            textBox2.PasswordChar = '*';
         }
 
         private void InitForm_Load(object sender, EventArgs e)

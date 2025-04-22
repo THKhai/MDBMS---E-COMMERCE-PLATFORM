@@ -1,8 +1,6 @@
 ﻿use("e-commerce");
 
 db.createCollection("products");
-
-
 db.products.insertMany([
     {
         name: "Áo thun Nike",
@@ -10,10 +8,12 @@ db.products.insertMany([
         category: "Thời trang",
         price: 250000,
         stock: 50,
-        attributes: {
-            size: "L",
-            color: "Đen",
-            material: "Cotton"
+        description: "Size L, màu đen, chất liệu cotton",
+        seller_id: "64f0c8e4f1d2e7d1f4a5b8c3",
+        sale: {
+            percent: 10,
+            start_date: new Date("2025-10-01"),
+            end_date: new Date("2025-10-15")
         }
     },
     {
@@ -22,11 +22,8 @@ db.products.insertMany([
         category: "Thời trang",
         price: 300000,
         stock: 35,
-        attributes: {
-            size: "M",
-            color: "Xám",
-            material: "Polyester"
-        }
+        description: "Size M, màu xám, chất liệu Polyester",
+        seller_id: "6806779aae3f0d475efa13f0"
     },
     {
         name: "Giày Converse Classic",
@@ -34,11 +31,8 @@ db.products.insertMany([
         category: "Giày dép",
         price: 900000,
         stock: 20,
-        attributes: {
-            size: 42,
-            color: "Trắng",
-            material: "Canvas"
-        }
+        description: "Size 42, màu trắng, chất liệu Canvas",
+        seller_id: "64f0c8e4f1d2e7d1f4a5b8c3"
     },
     {
         name: "Tai nghe Bluetooth Sony",
@@ -46,11 +40,8 @@ db.products.insertMany([
         category: "Thiết bị điện tử",
         price: 1200000,
         stock: 15,
-        attributes: {
-            brand: "Sony",
-            warranty: "12 tháng",
-            connectivity: "Bluetooth 5.0"
-        }
+        description: "Thương hiệu Sony, bảo hành 12 tháng, kết nối Bluetooth 5.0",
+        seller_id: "64f0c8e4f1d2e7d1f4a5b8c3"
     },
     {
         name: "Laptop Dell Inspiron",
@@ -58,12 +49,8 @@ db.products.insertMany([
         category: "Máy tính",
         price: 15000000,
         stock: 10,
-        attributes: {
-            brand: "Dell",
-            warranty: "24 tháng",
-            cpu: "Intel i5",
-            ram: "8GB"
-        }
+        description: "Thương hiệu Dell, bảo hành 24 tháng, CPU Intel i5, RAM 8GB",
+        seller_id: "6806779aae3f0d475efa13f0"
     },
     {
         name: "Sách Clean Code",
@@ -71,11 +58,8 @@ db.products.insertMany([
         category: "Sách",
         price: 200000,
         stock: 100,
-        attributes: {
-            author: "Robert C. Martin",
-            pages: 464,
-            language: "Tiếng Việt"
-        }
+        description: "Tác giả Robert C. Martin, 464 trang, ngôn ngữ Tiếng Việt",
+        seller_id: "64f0c8e4f1d2e7d1f4a5b8c3"
     },
     {
         name: "Túi xách nữ LV",
@@ -83,11 +67,8 @@ db.products.insertMany([
         category: "Phụ kiện",
         price: 4500000,
         stock: 5,
-        attributes: {
-            material: "Da thật",
-            color: "Nâu",
-            size: "Trung"
-        }
+        description: "Chất liệu da thật, màu nâu, kích thước trung",
+        seller_id: "6806779aae3f0d475efa13f0"
     },
     {
         name: "Nồi chiên không dầu Lock&Lock",
@@ -95,10 +76,12 @@ db.products.insertMany([
         category: "Gia dụng",
         price: 2200000,
         stock: 8,
-        attributes: {
-            brand: "Lock&Lock",
-            capacity: "5L",
-            power: "1500W"
+        description: "Thương hiệu Lock&Lock, dung tích 5L, công suất 1500W",
+        seller_id: "6806779aae3f0d475efa13f0",
+        sale: {
+            percent: 20,
+            start_date: new Date("2025-04-20"),
+            end_date: new Date("2025-04-30")
         }
     },
     {
@@ -107,11 +90,9 @@ db.products.insertMany([
         category: "Điện thoại",
         price: 20000000,
         stock: 12,
-        attributes: {
-            brand: "Apple",
-            storage: "128GB",
-            color: "Midnight"
-        }
+        description: "Thương hiệu Apple, dung lượng 128GB, màu Midnight",
+        seller_id: "6806779aae3f0d475efa13f0"
+
     },
     {
         name: "Bình giữ nhiệt Tiger",
@@ -119,10 +100,8 @@ db.products.insertMany([
         category: "Gia dụng",
         price: 650000,
         stock: 25,
-        attributes: {
-            brand: "Tiger",
-            capacity: "500ml",
-            material: "Inox"
-        }
+        description: "Thương hiệu Tiger, dung tích 500ml, chất liệu Inox",
+        seller_id: "6806779aae3f0d475efa13f0"
+
     }
 ]);
