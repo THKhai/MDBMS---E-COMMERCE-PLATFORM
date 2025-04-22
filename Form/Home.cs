@@ -16,7 +16,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 
     public partial class Home : System.Windows.Forms.Form
     {
-        public static string Key { get; set; }
+        private static string Key { get; set; }
         private BsonDocument Customer { get; set; }
         private bool IsSeller { get; set; }
 

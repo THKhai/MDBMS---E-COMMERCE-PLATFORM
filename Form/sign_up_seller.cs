@@ -7,7 +7,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
     public partial class sign_up_seller : System.Windows.Forms.Form
     {
-        public static string Key { get; set; }
+        private static string Key { get; set; }
         
         public sign_up_seller(string key)
         {

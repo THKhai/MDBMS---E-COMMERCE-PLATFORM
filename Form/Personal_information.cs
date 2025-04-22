@@ -7,9 +7,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
     public partial class Personal_information : System.Windows.Forms.Form
     {
-        public static BsonDocument Cusomter { get; set; }
-        public static string Key { get; set; }
-        public static Boolean isEdit = false;
+        private static BsonDocument Cusomter { get; set; }
+        private static string Key { get; set; }
+        private static Boolean isEdit = false;
         public Personal_information(BsonDocument customer,string key)
         {
             InitializeComponent();

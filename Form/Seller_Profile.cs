@@ -7,8 +7,8 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
     public partial class Seller_Profile : System.Windows.Forms.Form
     {
-        public static BsonDocument Seller { get; set; }
-        public static Boolean isEdit = false;
+        private static BsonDocument Seller { get; set; }
+        private static Boolean isEdit = false;
         
         public Seller_Profile(BsonDocument cutomer)
         {

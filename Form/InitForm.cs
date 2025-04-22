@@ -9,7 +9,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
     public partial class InitForm : System.Windows.Forms.Form
     {
-        public static string key {get; set; }
+        private static string key {get; set; }
         public InitForm()
         {
             InitializeComponent();
