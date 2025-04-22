@@ -63,7 +63,7 @@ Desktop.ini
 # Publish folder
 publish/
 
-/repository/data_base_log
+/Repository/data_base_log
 *.meta
 *.db
 *.crc32
@@ -81,4 +81,4 @@ publish/
 *.0000000001
 *.lock
 *.bson
-/MDBMS---E-COMMERCE-PLATFORM/repository/data_base_log
+/MDBMS---E-COMMERCE-PLATFORM/Repository/data_base_log
