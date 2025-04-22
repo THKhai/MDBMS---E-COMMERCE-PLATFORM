@@ -12,7 +12,7 @@ db.products.insertMany([
         seller_id: "64f0c8e4f1d2e7d1f4a5b8c3",
         sale: {
             percent: 10,
-            start_date: new Date("2025-10-01"),
+            start_date: new Date("2025-04-20"),
             end_date: new Date("2025-10-15")
         }
     },

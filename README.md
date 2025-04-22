@@ -14,7 +14,7 @@ MDBMS (Multi-Database Management System) is an e-commerce platform that integrat
 - `Program.cs`: The entry point of the application.
 - `dbup.bat`: A script to start Docker containers, initialize databases, and run migration scripts.
 - `dbdown.bat`: A script to stop and clean up Docker containers and data.
-- `repository/migration_scripts/`: Contains migration scripts for each database:
+- `Repository/migration_scripts/`: Contains migration scripts for each database:
     - `cassandra/`: `.cql` scripts for Cassandra.
     - `mongoDB/`: `.js` scripts for MongoDB.
     - `neo4j/`: `.cypher` scripts for Neo4j.
@@ -50,7 +50,7 @@ To stop the containers and clean up the data, run the `dbdown.bat` script:
 - **Sample Data**:
     - `Sample Data 1`
     - `Sample Data 2`
-- **Initialization Script**: `repository/migration_scripts/cassandra/V.0_0_0.cql`
+- **Initialization Script**: `Repository/migration_scripts/cassandra/V.0_0_0.cql`
 
 ### MongoDB
 - **Database**: `mydatabase`
@@ -59,18 +59,18 @@ To stop the containers and clean up the data, run the `dbdown.bat` script:
 - **Sample Data**:
     - `Sample Data 1`
     - `Sample Data 2`
-- **Initialization Script**: `repository/migration_scripts/mongoDB/V.0_0_0.js`
+- **Initialization Script**: `Repository/migration_scripts/mongoDB/V.0_0_0.js`
 
 ### Neo4j
 - **Nodes**: `Student`
 - **Sample Data**:
     - `Nguyễn Văn A`, `Trần Thị B`, `Lê Văn C`, `Phạm Thị D`, `Vũ Minh E`, `Vũ Thị F`, `Lê Văn G`, `Trần Thị H`
-- **Initialization Script**: `repository/migration_scripts/neo4j/V.0_0_0.cypher`
+- **Initialization Script**: `Repository/migration_scripts/neo4j/V.0_0_0.cypher`
 
 ### Redis
 - **Key**: `user:1000`
 - **Value**: `"Toan Tu"`
-- **Initialization Script**: `repository/migration_scripts/redis/V.0_0_0.rdb`
+- **Initialization Script**: `Repository/migration_scripts/redis/V.0_0_0.rdb`
 
 ## License
 This project is licensed under the MIT License. See the `LICENSE` file for details.

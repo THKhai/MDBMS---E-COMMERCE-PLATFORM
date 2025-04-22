@@ -37,9 +37,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProductGridView)).BeginInit();
             this.SuspendLayout();
-            //
+            // 
             // Save
-            //
+            // 
             this.Save.Location = new System.Drawing.Point(797, 460);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(196, 57);
@@ -47,9 +47,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
             this.Save.Text = "Save";
             this.Save.UseVisualStyleBackColor = true;
             this.Save.Click += new System.EventHandler(this.BtnSaveClick);
-            //
+            // 
             // ProductGridView
-            //
+            // 
             this.ProductGridView.BackgroundColor = System.Drawing.Color.Lavender;
             this.ProductGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ProductGridView.GridColor = System.Drawing.SystemColors.ActiveBorder;
@@ -58,9 +58,10 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
             this.ProductGridView.RowTemplate.Height = 24;
             this.ProductGridView.Size = new System.Drawing.Size(981, 357);
             this.ProductGridView.TabIndex = 1;
-            //
+            this.ProductGridView.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ProductGridView_RowHeaderMouseDoubleClick);
+            // 
             // button2
-            //
+            // 
             this.button2.Location = new System.Drawing.Point(12, 460);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(196, 57);
@@ -68,9 +69,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            //
+            // 
             // label1
-            //
+            // 
             this.label1.Font = new System.Drawing.Font("JetBrains Mono", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Location = new System.Drawing.Point(12, 9);
@@ -79,9 +80,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
             this.label1.TabIndex = 3;
             this.label1.Text = "My Storage";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
+            // 
             // Storage
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SkyBlue;

@@ -10,7 +10,7 @@ services:
         max-size: "10m"
         max-file: "3"
     volumes:
-      - ./repository/data_base_log/redis_data:/data
+      - ./Repository/data_base_log/redis_data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 30s
@@ -29,7 +29,7 @@ services:
         max-size: "10m"
         max-file: "3"
     volumes:
-      - ./repository/data_base_log/mongo_data:/data/db
+      - ./Repository/data_base_log/mongo_data:/data/db
     healthcheck:
       test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
       interval: 30s
@@ -48,7 +48,7 @@ services:
         max-size: "10m"
         max-file: "3"
     volumes:
-      - ./repository/data_base_log/cassandra_data:/var/lib/cassandra
+      - ./Repository/data_base_log/cassandra_data:/var/lib/cassandra
     healthcheck:
       test: ["CMD", "cqlsh", "-e", "describe keyspaces"]
       interval: 30s
@@ -71,7 +71,7 @@ services:
         max-size: "10m"
         max-file: "3"
     volumes:
-      - ./repository/data_base_log/neo4j_data:/data
+      - ./Repository/data_base_log/neo4j_data:/data
     healthcheck:
       test: ["CMD", "cypher-shell", "-u", "neo4j", "-p", "superadmin", "RETURN 1"]
       interval: 30s
