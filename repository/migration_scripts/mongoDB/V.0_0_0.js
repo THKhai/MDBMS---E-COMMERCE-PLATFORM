@@ -10,3 +10,6 @@ db.sampleCollection.insertMany([
     { name: "Sample Data 1" },
     { name: "Sample Data 2" }
 ]);
+
+use ("e-commerce");
+db.createCollection("infromation_customers");
