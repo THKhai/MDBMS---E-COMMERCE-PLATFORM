@@ -145,6 +145,12 @@
     <Compile Include="Form\Cart.Designer.cs">
       <DependentUpon>Cart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\Order.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Order.Designer.cs">
+      <DependentUpon>Order.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\Product.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     <Compile Include="repository\Entity\SaleDto.cs" />
     <EmbeddedResource Include="Form\Cart.resx">
       <DependentUpon>Cart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Order.resx">
+      <DependentUpon>Order.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Product.resx">
       <DependentUpon>Product.cs</DependentUpon>

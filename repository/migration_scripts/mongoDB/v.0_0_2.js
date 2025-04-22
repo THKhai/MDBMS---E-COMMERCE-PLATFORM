@@ -1,3 +1,3 @@
 use("e-commerce");
 
-db.createCollection("carts");
+db.createCollection("orders");

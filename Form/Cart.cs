@@ -16,12 +16,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
         private string userEmail;
         private ObjectId userId;
         private string cartKey;
-        
-        public Cart()
-        {
-            InitializeComponent();
-        }
-        
+
+        private BsonDocument itemInfo;
+        private int totalPrice = 0;
         public Cart(string email)
         {
             InitializeComponent();
@@ -90,6 +87,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             }
 
             label1.Text = "Tổng cộng: " + totalCartPrice.ToString("N0") + " đ";
+            totalPrice = totalCartPrice;
         }
 
         private void Cart_Load(object sender, EventArgs e)
@@ -106,6 +104,15 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             flowLayoutPanelCart.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanelCart.WrapContents = false;
             flowLayoutPanelCart.AutoScroll = true;
+            
+            label2.Text = "Giỏ hàng";
+            label2.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+            label2.ForeColor = Color.White;
+            label2.BackColor = Color.DarkTurquoise;
+            label2.Width = this.Width;
+            label2.Height = 24;
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            label2.Location = new Point(0, 8);
             
             int stt = 1;
             int totalCartPrice = 0; // Tổng giỏ hàng
@@ -125,6 +132,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 
                 flowLayoutPanelCart.Controls.Add(lblEmpty);
                 label1.Text = "Tổng cộng: 0đ";
+                totalPrice = 0;
                 return;
             }
 
@@ -135,7 +143,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 string productId = item.Name;
                 int quantity = (int)item.Value;
 
-                BsonDocument itemInfo = GetProduct(productId);
+                itemInfo = GetProduct(productId);
 
                 // Tạo panel cho từng dòng
                 var itemPanel = new Panel();
@@ -159,11 +167,16 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 lblName.Location = new Point(30, 7);
 
                 // Nút xoá
-                var btnDelete = new Button();
-                btnDelete.BackColor = Color.White;
+                var btnDelete = new Button(); 
+                btnDelete.FlatStyle = FlatStyle.Flat;
+                btnDelete.FlatAppearance.BorderColor = Color.Red; 
+                btnDelete.FlatAppearance.BorderSize = 0;
+                btnDelete.BackColor = Color.Red;
+                btnDelete.ForeColor = Color.White;
                 btnDelete.Text = "Xoá";
                 btnDelete.Width = 60;
-                btnDelete.Location = new Point(flowLayoutPanelCart.Width - 175, 7);
+                btnDelete.Height = 20;
+                btnDelete.Location = new Point(flowLayoutPanelCart.Width - 175, 2);
                 btnDelete.Tag = productId;
                 btnDelete.Click += BtnDelete_Click;
 
@@ -171,7 +184,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 var lblPrice = new Label();
                 lblPrice.BackColor = Color.Transparent;
                 int price = itemInfo.GetValue("price", 0).ToInt32();
-                int totalPrice = price * quantity;
+                totalPrice = price * quantity;
                 lblPrice.Text = totalPrice.ToString("N0") + " đ";
                 lblPrice.Width = 200;
                 lblPrice.Location = new Point(flowLayoutPanelCart.Width - btnDelete.Width - 50, 7);
@@ -182,12 +195,12 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 nudQuantity.Minimum = 1;
                 nudQuantity.Maximum = 100;
                 nudQuantity.Width = 60;
-                nudQuantity.Location = new Point(flowLayoutPanelCart.Width - 240, 7);
+                nudQuantity.Location = new Point(flowLayoutPanelCart.Width - 240, 2);
                 nudQuantity.Tag = new { ProductId = productId, Price = price, Label = lblPrice, TotalPrice = label1};
                 nudQuantity.ValueChanged += NudQuantity_ValueChanged;
                 
                 totalCartPrice += totalPrice; // cộng dồn giá trị từng sản phẩm
-
+                totalPrice = totalCartPrice;
                 // Thêm vào itemPanel
                 itemPanel.Controls.Add(lblStt);
                 itemPanel.Controls.Add(lblName);
@@ -218,7 +231,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             // Cập nhật lại giá hiển thị
             int newTotalPrice = price * newQuantity;
             lblPrice.Text = newTotalPrice.ToString("N0") + " đ";
-            
+            totalPrice = newTotalPrice;
             // Cập nhật lại tổng giá giỏ hàng
             UpdateTotalCartPrice();
         }
@@ -232,5 +245,15 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             LoadCart();  // Refresh lại
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Order order = new Order(userEmail, itemInfo, totalPrice);
+            order.ShowDialog(); // Dùng ShowDialog để mở form giỏ hàng như một modal dialog
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.Close();        }
     }
 }
