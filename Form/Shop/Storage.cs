@@ -116,7 +116,8 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
                 catch (Exception exception)
                 {
                     MessageBox.Show($@"Missing or Invalid product information or Product name duplicate");
-                    throw;
+                    LoadShopItems();
+                    return;
                 }
             }
             _shopProducts.Clear();

@@ -188,7 +188,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             else
             {
                 var storagePage = new Storage(email, this.MongoClient);
+                Hide();
                 storagePage.ShowDialog();
+                Show();
             }
         }
 
@@ -205,7 +207,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             else
             {
                 var invoicePage = new Invoice(email, this.MongoClient);
+                Hide();
                 invoicePage.ShowDialog();
+                Show();
             }
         }
 
