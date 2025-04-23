@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using StackExchange.Redis;
+using System.Collections.Generic;
 
 namespace MDBMS___E_COMMERCE_PLATFORM.Form
 {
@@ -17,7 +18,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
         private ObjectId userId;
         private string cartKey;
 
-        private BsonDocument itemInfo;
+
         private int totalPrice = 0;
         public Cart(string email)
         {
@@ -61,11 +62,15 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             return ObjectId.Empty; // Nếu không tìm thấy người dùng
         }
 
-        private BsonDocument  GetProduct(string productId)
+        private BsonDocument  GetProduct(string productId, int quantity)
         {
             var objectId = ObjectId.Parse(productId);  // convert string to ObjectId
             var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
             var product = _productCollection.Find(filter).FirstOrDefault();
+            if (product != null)
+            {
+                product.Add("quantity", quantity); // Add quantity field to BsonDocument
+            }
             return product;
         }
         
@@ -80,13 +85,13 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 string productId = item.Name;
                 int quantity = (int)item.Value;
 
-                BsonDocument itemInfo = GetProduct(productId);
+                BsonDocument itemInfo = GetProduct(productId, quantity);
                 int price = itemInfo.GetValue("price", 0).ToInt32();
 
                 totalCartPrice += price * quantity;
             }
 
-            label1.Text = "Tổng cộng: " + totalCartPrice.ToString("N0") + " đ";
+            label1.Text = "Tổng cộng: " + totalCartPrice.ToString("N0") + "đ";
             totalPrice = totalCartPrice;
         }
 
@@ -143,8 +148,8 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 string productId = item.Name;
                 int quantity = (int)item.Value;
 
-                itemInfo = GetProduct(productId);
-
+                BsonDocument itemInfo = GetProduct(productId, quantity);
+                
                 // Tạo panel cho từng dòng
                 var itemPanel = new Panel();
                 itemPanel.Width = flowLayoutPanelCart.Width - 30;
@@ -185,7 +190,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 lblPrice.BackColor = Color.Transparent;
                 int price = itemInfo.GetValue("price", 0).ToInt32();
                 totalPrice = price * quantity;
-                lblPrice.Text = totalPrice.ToString("N0") + " đ";
+                lblPrice.Text = totalPrice.ToString("N0") + "đ";
                 lblPrice.Width = 200;
                 lblPrice.Location = new Point(flowLayoutPanelCart.Width - btnDelete.Width - 50, 7);
 
@@ -230,7 +235,8 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 
             // Cập nhật lại giá hiển thị
             int newTotalPrice = price * newQuantity;
-            lblPrice.Text = newTotalPrice.ToString("N0") + " đ";
+            lblPrice.Text = newTotalPrice.ToString("N0") + "đ";
+            
             totalPrice = newTotalPrice;
             // Cập nhật lại tổng giá giỏ hàng
             UpdateTotalCartPrice();
@@ -247,13 +253,14 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Order order = new Order(userEmail, itemInfo, totalPrice);
+            Order order = new Order(userEmail, totalPrice);
             order.ShowDialog(); // Dùng ShowDialog để mở form giỏ hàng như một modal dialog
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            this.Close();        }
+            this.Close();
+        }
     }
 }
