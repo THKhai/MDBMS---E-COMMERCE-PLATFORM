@@ -216,7 +216,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 // Thêm vào flowLayoutPanelCart
                 flowLayoutPanelCart.Controls.Add(itemPanel);
             }
-            label1.Text = "Tổng cộng: " + totalCartPrice.ToString("N0") + " đ";
+            label1.Text = "Tổng cộng: " + totalCartPrice.ToString("N0") + "đ";
 
         }
         private void NudQuantity_ValueChanged(object sender, EventArgs e)

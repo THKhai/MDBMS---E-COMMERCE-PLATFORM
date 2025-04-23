@@ -209,6 +209,12 @@
     <Compile Include="Form\sign_up_seller.Designer.cs">
       <DependentUpon>sign_up_seller.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Form\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Entity\ProductDto.cs" />
