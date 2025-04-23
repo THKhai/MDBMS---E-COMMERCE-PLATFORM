@@ -51,8 +51,6 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 MessageBox.Show("Không tìm thấy người dùng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
-
-            //label1.Text = cartItems.ToString();
             
             header.Text = "Đặt hàng";
             header.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
@@ -116,22 +114,25 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 flowLayoutPanel1.Controls.Add(itemPanel);
             }*/
             
-            //Giới hạn ký tự
+            //Ràng buộc Input
+            textBox2.KeyPress += textBox2_KeyPress;
+            textBox4.KeyPress += textBox4_KeyPress;
             textBox2.MaxLength = 16;
+            textBox4.MaxLength = 11;
             richTextBox1.MaxLength = 500;
             
-            label5.Text = "Tổng cộng: " + totalPrice.ToString("N0") + " đ";
-            textBox1.Enter += textBox1_Enter;
-            textBox1.Leave += textBox1_Leave;
+            panel1.Location = new Point(71, 115);
+            panel2.Location = new Point(71, 108);
+            panel3.Location = new Point(71, 142);
+            
+            label5.Text = "Tổng cộng: " + totalPrice.ToString("N0") + "đ";
+            textBox3.Text = GetCustomerFieldById(userId, "Name");
+            textBox4.Text = GetCustomerFieldById(userId, "Phone");
+            textBox1.Text = GetCustomerFieldById(userId, "Address");
 
-            label2.Hide();
-            textBox2.Hide();
-            radioButton1.Hide();
-            radioButton2.Hide();
-            radioButton3.Hide();
-            radioButton4.Hide();
-            label3.Hide();
             label5.Hide();
+            panel2.Hide();
+            panel3.Hide();
         }
         
         private ObjectId GetUserIdByEmail(string email)
@@ -146,37 +147,42 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             return ObjectId.Empty; // Nếu không tìm thấy người dùng
         }
         
-        private void textBox1_Enter(object sender, EventArgs e)
-        {
-            if (textBox1.Text == "Vui lòng nhập địa chỉ")
-            {
-                textBox1.Text = "";
-                textBox1.ForeColor = Color.Black;
-            }
-        }
-        
-        private void textBox1_Leave(object sender, EventArgs e)
+        public string GetCustomerFieldById(ObjectId userId, string fieldName)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("_id", userId);
-            // Tìm document
             var customer = _customerCollection.Find(filter).FirstOrDefault();
-            if (customer != null && customer.Contains("address"))
-            {
-                var address = customer["address"].ToString();
-                textBox1.Text = address;
-            }
-            else
-            {
-                textBox1.Text = "Vui lòng nhập địa chỉ";
-                textBox1.ForeColor = Color.Gray;
-            }
-        }
 
+            if (customer != null && customer.Contains(fieldName))
+            {
+                return customer[fieldName].ToString();
+            }
+
+            return null;
+        }
+        
         private void Order_Load(object sender, EventArgs e)
         {
             
         }
 
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Nếu không phải là số và không phải phím Backspace thì chặn
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Nếu không phải là số và không phải phím Backspace thì chặn
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
@@ -190,49 +196,25 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             if (radioButton2.Checked)
             {
                 paymentMethod = "Credit Card";
-                label3.Show();
-                textBox2.Show();
+                panel3.Show();
             } 
             else
             {
-                label3.Hide();
-                textBox2.Hide();
+                panel3.Hide();
             }
         }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton3.Checked)
-            {
-                paymentMethod = "E Wallet";
-                label3.Show();
-                textBox2.Show();
-            } 
-            else
-            {
-                label3.Hide();
-                textBox2.Hide();
-            }
-        }
-
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton4.Checked)
-            {
-                paymentMethod = "installment payment";
-                label3.Show();
-                textBox2.Show();
-            } 
-            else
-            {
-                label3.Hide();
-                textBox2.Hide();
-            }
-            
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(textBox3.Text) ||
+                string.IsNullOrWhiteSpace(textBox4.Text) ||
+                string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin trước khi tiếp tục.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
             button1.Hide();
             button2.Hide();
 
@@ -249,21 +231,11 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             button4.Text = "Quay về";
             button4.Click += new EventHandler(Button4_Click);
             this.Controls.Add(button4);
-
-            label1.Hide();
-            textBox1.Hide();
-            label4.Hide();
-            richTextBox1.Hide();
             
-            label2.Show();
+            panel1.Hide();
+            panel2.Show();
+            
             label5.Show();
-            //label3.Show();
-            //textBox2.Show();
-            
-            radioButton1.Show();
-            radioButton2.Show();
-            radioButton3.Show();
-            radioButton4.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -274,29 +246,69 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
         
         private void Button3_Click(object sender, EventArgs e)
         {
+            if (!radioButton1.Checked && !radioButton2.Checked)
+            {
+                MessageBox.Show("Vui lòng chọn phương thức thanh toán trước khi tiếp tục.", "Thiếu phương thức thanh toán", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;  // Nếu không chọn, dừng lại và không thực hiện tiếp
+            }
+            if (string.IsNullOrWhiteSpace(textBox3.Text))
+            {
+                MessageBox.Show("Vui lòng điền số thẻ.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            List<BsonDocument> orderItems = new List<BsonDocument>();
+
+            var cartItems = _redisDatabase.HashGetAll(cartKey);
+            
+            foreach (var item in cartItems)
+            {
+                string productId = item.Name;
+                int quantity = (int)item.Value;
+                
+                var orderItemDocument = new BsonDocument
+                {
+                    { "ProductID", productId },
+                    { "Quantity", quantity }
+                };
+    
+                // Thêm vào danh sách orderItems
+                orderItems.Add(orderItemDocument);
+            }
+            var orderDocument = new BsonDocument
+            {
+                { "CustomerID", userId },
+                { "OrderItems", new BsonArray(orderItems) },
+                { "TotalPrice", totalPrice },
+                { "PaymentMethod", paymentMethod },
+                { "Status", "Pending" },
+                { "created_at", DateTime.UtcNow },
+                { "updated_at", DateTime.UtcNow }
+            };
+            
+            var client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("e-commerce");
+            var collection = database.GetCollection<BsonDocument>("orders");
+            
+            collection.InsertOne(orderDocument);
+
+            _redisDatabase.KeyDelete(cartKey);
+
             // Action for button3 click
-            MessageBox.Show("Button 3 was clicked!");
+            MessageBox.Show("Thanh toán thành công!");
+            
+            this.Hide();
+            this.Close();
         }
         
         private void Button4_Click(object sender, EventArgs e)
         {
-            label2.Hide();
-            label5.Hide();
-            radioButton1.Hide();
-            radioButton2.Hide();
-            radioButton3.Hide();
-            radioButton4.Hide();
-            //label3.Hide();
-            //textBox2.Hide();
-
-            
-            label1.Show();
-            textBox1.Show();
-            label4.Show();
-            richTextBox1.Show();
+            panel2.Hide();
+            panel1.Show();
             
             button1.Show();
             button2.Show();
+            label5.Hide();
         }
     }
     
