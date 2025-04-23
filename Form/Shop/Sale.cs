@@ -23,21 +23,31 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
             MongoDatabase = MongoClient.GetDatabase("e-commerce");
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker2.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            dateTimePicker2.CustomFormat = "dd/MM/yyyy";
+            dateTimePicker1.CustomFormat = @"dd/MM/yyyy";
+            dateTimePicker2.CustomFormat = @"dd/MM/yyyy";
         }
 
         private void Sale_Load(object sender, EventArgs e)
         {
             RefreshPrice();
+            if (_product.Sale == null) return;
+            dateTimePicker1.Value = _product.Sale.StartDate;
+            dateTimePicker2.Value = _product.Sale.EndDate;
+            numericUpDown1.Value = _product.Sale.Percent;
         }
 
         private void RefreshPrice()
         {
+            if (_product.Sale == null)
+            {
+                button3.Hide();
+            }
+
             label1.Text = $@"Product name: {_product.Name}";
             label2.Text = $@"Original Price: {_product.Price}";
             label3.Text = $@"Discount Price: {_product.Price - (_product.Price * numericUpDown1.Value / 100)}";
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             DateTime startDate = DateTime.Parse(dateTimePicker1.Value.ToString(CultureInfo.InvariantCulture), null,
@@ -77,6 +87,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
             catch (Exception exception)
             {
                 MessageBox.Show($@"Invalid sale datetime input or percent value.");
+                Console.Error.WriteLine(@"ERR: " + exception);
             }
         }
 
@@ -88,6 +99,40 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (_product.Sale == null)
+            {
+                MessageBox.Show($@"This product does not have sale information.");
+                return;
+            }
+
+            try
+            {
+                ProductDto updateProduct = new ProductDto(
+                    _product.Id,
+                    _product.Name,
+                    _product.ProductType,
+                    _product.Category,
+                    _product.Price,
+                    _product.Stock,
+                    _product.Description,
+                    _product.SellerId
+                );
+                var productCollection = MongoDatabase.GetCollection<ProductDto>("products");
+                productCollection.DeleteOne(Builders<ProductDto>.Filter.And(
+                    Builders<ProductDto>.Filter.Eq("seller_id", _product.SellerId),
+                    Builders<ProductDto>.Filter.Eq("name", _product.Name)
+                ));
+                productCollection.InsertOne(updateProduct);
+                Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($@"Something went wrong while deleting sale information. ERR:{exception.Message}");
+            }
         }
     }
 }

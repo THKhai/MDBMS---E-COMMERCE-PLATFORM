@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Driver.Linq;
 
 namespace MDBMS___E_COMMERCE_PLATFORM.Repository.Entity
 {
@@ -96,7 +95,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Repository.Entity
                         product.Stock,
                         product.Description);
                     dataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Blue;
-                    dataGridView.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.White;
+                    dataGridView.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Yellow;
                 }
                 else
                 {
