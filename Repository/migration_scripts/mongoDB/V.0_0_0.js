@@ -8,7 +8,7 @@ use("e-commerce");
 db.createCollection("information_customers");
 db.information_customers.insertOne(
     {
-        "_id": "64f0c8e4f1d2e7d1f4a5b8c3",
+        "_id": ObjectId("64f0c8e4f1d2e7d1f4a5b8c3"),
         "Bio": "",
         "Email": "toantu03@gmail.com",
         "Name": "Toan Tu",
