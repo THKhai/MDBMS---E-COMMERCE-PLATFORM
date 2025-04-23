@@ -15,7 +15,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
 
         private string UserId { get; set; }
 
-        private List<ProductDto> _shopProducts = null;
+        private List<ProductDto> _shopProducts;
 
         public Storage(string email, MongoClient client)
         {
@@ -87,15 +87,12 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
                     var productCategory = row.Cells["Category"].Value == null
                         ? ""
                         : row.Cells["Category"].Value.ToString();
-                    ;
                     var productType = row.Cells["ProductType"].Value == null
                         ? ""
                         : row.Cells["ProductType"].Value.ToString();
-                    ;
                     var productDescription = row.Cells["Description"].Value == null
                         ? ""
                         : row.Cells["Description"].Value.ToString();
-                    ;
                     var productId = GetProductId(row.Cells["Name"].Value.ToString());
                     var saleInfo = GetSaleInfo(row.Cells["Name"].Value.ToString());
                     ProductDto currentProduct;
@@ -136,6 +133,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
                 catch (Exception exception)
                 {
                     MessageBox.Show($@"Missing or Invalid product information or Product name duplicate");
+                    Console.Error.WriteLine(@"ERR: " + exception);
                     LoadShopItems();
                     return;
                 }
