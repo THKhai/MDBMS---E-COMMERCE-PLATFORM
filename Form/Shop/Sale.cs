@@ -30,6 +30,8 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
         private void Sale_Load(object sender, EventArgs e)
         {
             RefreshPrice();
+            dateTimePicker1.Value = DateTime.Now;
+            dateTimePicker2.Value = DateTime.Now;
             if (_product.Sale == null) return;
             dateTimePicker1.Value = _product.Sale.StartDate;
             dateTimePicker2.Value = _product.Sale.EndDate;
