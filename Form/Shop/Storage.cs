@@ -41,7 +41,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form.Shop
             ProductDto.MapToDataGridView(ProductGridView, _shopProducts);
         }
 
-        private string ExtractUserId(string email)
+        public string ExtractUserId(string email)
         {
             var collection = MongoDatabase.GetCollection<BsonDocument>("information_customers");
             var filter = Builders<BsonDocument>.Filter.Eq("Email", email);
