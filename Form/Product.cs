@@ -135,17 +135,37 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                         // Lưu giỏ hàng vào Redis với key = "cart:{userId}"
                         var cartKey = "cart:" + userId.ToString();
 
-                        // Thêm sản phẩm vào giỏ hàng trong Redis
-                        var productInfo = new BsonDocument
-                        {
-                            { "sellerId", sellerID },
-                            { "quantity", quantity }
-                        };
-                        _redisDatabase.HashSet(cartKey, id, productInfo.ToString());
+                        // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+                        string productInfoJson = _redisDatabase.HashGet(cartKey, id);
 
+                        if (!string.IsNullOrEmpty(productInfoJson))
+                        {
+                            // Sản phẩm đã có trong giỏ hàng, cập nhật số lượng
+                            var productInfo = BsonDocument.Parse(productInfoJson);
+                            int currentQuantity = productInfo["quantity"].AsInt32; 
+                            currentQuantity += quantity;
+                            productInfo["quantity"] = currentQuantity;
+                            // Cộng dồn số lượng vào Redis
+                            _redisDatabase.HashSet(cartKey, id, productInfo.ToString());
+                        }
+                        else
+                        {
+                            // Sản phẩm chưa có trong giỏ hàng, thêm mới
+                            var productInfo = new BsonDocument
+                            {
+                                { "sellerId", sellerID },
+                                { "quantity", quantity }
+                            };
+
+                            // Lưu sản phẩm vào Redis
+                            _redisDatabase.HashSet(cartKey, id, productInfo.ToString());
+                        }
+
+                        // Thông báo đã thêm sản phẩm vào giỏ hàng
                         MessageBox.Show($"Đã thêm: {name} x{quantity} = {price * quantity:N0}đ", 
                             "Thêm vào giỏ hàng", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+
                     else
                     {
                         MessageBox.Show("Không tìm thấy thông tin người dùng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
