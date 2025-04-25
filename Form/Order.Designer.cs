@@ -78,7 +78,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(24, 2);
+            this.label3.Location = new System.Drawing.Point(19, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(140, 19);
             this.label3.TabIndex = 16;
@@ -106,7 +106,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(536, 296);
+            this.label5.Location = new System.Drawing.Point(515, 296);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(174, 26);
             this.label5.TabIndex = 21;
@@ -153,7 +153,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             // 
             // radioButton1
             // 
-            this.radioButton1.Location = new System.Drawing.Point(199, 2);
+            this.radioButton1.Location = new System.Drawing.Point(225, 2);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(200, 26);
             this.radioButton1.TabIndex = 10;
@@ -164,7 +164,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             // 
             // radioButton2
             // 
-            this.radioButton2.Location = new System.Drawing.Point(420, 2);
+            this.radioButton2.Location = new System.Drawing.Point(446, 2);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(150, 26);
             this.radioButton2.TabIndex = 11;
@@ -185,7 +185,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             this.panel2.Controls.Add(this.radioButton2);
             this.panel2.Controls.Add(this.radioButton1);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(69, 212);
+            this.panel2.Location = new System.Drawing.Point(69, 232);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(641, 29);
             this.panel2.TabIndex = 23;
@@ -200,7 +200,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.richTextBox1);
-            this.panel1.Location = new System.Drawing.Point(38, 325);
+            this.panel1.Location = new System.Drawing.Point(88, 325);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(641, 226);
             this.panel1.TabIndex = 24;
@@ -239,7 +239,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             // 
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.textBox2);
-            this.panel3.Location = new System.Drawing.Point(69, 246);
+            this.panel3.Location = new System.Drawing.Point(69, 266);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(641, 35);
             this.panel3.TabIndex = 25;

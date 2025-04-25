@@ -276,7 +276,17 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (totalPrice == 0)
+            {
+                MessageBox.Show("Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm vào giỏ hàng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Dừng lại và không mở form Order
+            }
+            
             Order order = new Order(userEmail, totalPrice);
+            order.FormClosed += delegate
+            {
+                LoadCart();
+            };
             order.ShowDialog(); // Dùng ShowDialog để mở form giỏ hàng như một modal dialog
         }
 

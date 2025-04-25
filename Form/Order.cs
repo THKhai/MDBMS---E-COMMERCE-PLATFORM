@@ -20,6 +20,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
         private string paymentMethod;
 
         private int totalPrice;
+        Cart cart;
         
         public Order(string email, int price)
         {
@@ -68,9 +69,10 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             textBox4.MaxLength = 11;
             richTextBox1.MaxLength = 500;
             
-            panel1.Location = new Point(71, 115);
-            panel2.Location = new Point(71, 108);
-            panel3.Location = new Point(71, 142);
+            panel1.Location = new Point(61, 105);
+            panel2.Location = new Point(61, 138);
+            panel3.Location = new Point(61, 162);
+            label5.Location = new Point(390, 192);
             
             label5.Text = "Tổng cộng: " + totalPrice.ToString("N0") + "đ";
             textBox3.Text = GetCustomerFieldById(userId, "Name");
@@ -221,15 +223,23 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 string sellerId = productInfo["sellerId"].AsString;
                 int quantity = productInfo["quantity"].AsInt32;
                 
+                // Tìm kiếm sản phẩm dựa trên productId
+                ObjectId objectId = ObjectId.Parse(productId);
+                var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
+
+                // Cập nhật số lượng tồn kho
+                var update = Builders<BsonDocument>.Update.Inc("stock", -quantity);  // Giảm số lượng tồn kho
+
+                // Thực hiện cập nhật
+                var updateResult = _productCollection.UpdateOne(filter, update);
+                
                 var orderItemDocument = new BsonDocument
                 {
                     { "ProductID", productId },
                     { "SellerID", sellerId },
                     { "Quantity", quantity }
                 };
-    
-                Console.WriteLine($"Seller ID: {sellerId}, Quantity: {quantity}");
-
+                
                 // Thêm vào danh sách orderItems
                 orderItems.Add(orderItemDocument);
             }
@@ -246,17 +256,27 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 { "updated_at", DateTime.UtcNow }
             };
             
+            
             var client = new MongoClient("mongodb://localhost:27017");
             var database = client.GetDatabase("e-commerce");
             var collection = database.GetCollection<BsonDocument>("orders");
-            
             collection.InsertOne(orderDocument);
 
             _redisDatabase.KeyDelete(cartKey);
 
-            // Action for button3 click
+            collection = database.GetCollection<BsonDocument>("information_customers");
+            // Cập nhật document dựa trên _id
+            var updateDefinition = Builders<BsonDocument>.Update.Set("Address", textBox1.Text);
+            var result = collection.UpdateOne(
+                Builders<BsonDocument>.Filter.Eq("_id", userId), // Lọc theo _id
+                updateDefinition
+            );
+            
+            
+            // button3 click
             MessageBox.Show("Thanh toán thành công!");
             
+
             this.Hide();
             this.Close();
         }
