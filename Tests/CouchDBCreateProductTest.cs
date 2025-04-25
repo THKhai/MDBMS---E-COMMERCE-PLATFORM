@@ -12,10 +12,12 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Tests
 {
     public class CouchDbCreateProductTest
     {
-
         [Test]
         public void Given_5_user_100_row_for_create_product()
         {
+            var client = new CouchClient("http://localhost:5984",
+                settings => { settings.UseBasicAuthentication("admin", "admin"); });
+            client.CreateDatabaseAsync<ProductDtoCouch>("e-commerce");
             // Arrange
             List<string> listUserId = new List<string>();
 
@@ -37,12 +39,9 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Tests
             listUserId.Add(id4);
             listUserId.Add(id5);
 
-            var client = new CouchClient("http://localhost:5984",
-                settings => { settings.UseBasicAuthentication("admin", "admin"); });
-            client.CreateDatabaseAsync<ProductDtoCouch>("e-commerce");
             var database = client.GetDatabase<ProductDtoCouch>("e-commerce");
             // Process each user in parallel:
-            Parallel.For(0, listUserId.Count, (int i) =>
+            Parallel.For(0, listUserId.Count, i =>
             {
                 // Build a list with 100 simulated products for the user.
                 var productList = new List<ProductDtoCouch>();
@@ -102,7 +101,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Tests
                 settings => { settings.UseBasicAuthentication("admin", "admin"); });
             var database = client.GetDatabase<ProductDtoCouch>("e-commerce");
             // Process each user in parallel:
-            Parallel.For(0, listUserId.Count, (int i) =>
+            Parallel.For(0, listUserId.Count, i =>
             {
                 // Build a list with 100 simulated products for the user.
                 var productList = new List<ProductDtoCouch>();
@@ -162,7 +161,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Tests
                 settings => { settings.UseBasicAuthentication("admin", "admin"); });
             var database = client.GetDatabase<ProductDtoCouch>("e-commerce");
             // Process each user in parallel:
-            Parallel.For(0, listUserId.Count, (int i) =>
+            Parallel.For(0, listUserId.Count, i =>
             {
                 // Build a list with 100 simulated products for the user.
                 var productList = new List<ProductDtoCouch>();
@@ -225,7 +224,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Tests
             client.CreateDatabaseAsync<ProductDtoCouch>("e-commerce2");
             var database = client.GetDatabase<ProductDtoCouch>("e-commerce2");
             // Process each user in parallel:
-            Parallel.For(0, listUserId.Count, (int i) =>
+            Parallel.For(0, listUserId.Count, i =>
             {
                 // Build a list with 100 simulated products for the user.
                 var productList = new List<ProductDtoCouch>();
@@ -287,7 +286,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Tests
             client.CreateDatabaseAsync<ProductDtoCouch>("e-commerce3");
             var database = client.GetDatabase<ProductDtoCouch>("e-commerce3");
             // Process each user in parallel:
-            Parallel.For(0, listUserId.Count, (int i) =>
+            Parallel.For(0, listUserId.Count, i =>
             {
                 // Build a list with 100 simulated products for the user.
                 var productList = new List<ProductDtoCouch>();
