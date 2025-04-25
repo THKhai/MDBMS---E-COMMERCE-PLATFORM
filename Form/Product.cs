@@ -109,6 +109,8 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 string name = dgvProducts.CurrentRow.Cells[1].Value.ToString();
                 int price = Convert.ToInt32(dgvProducts.CurrentRow.Cells[3].Value);
                 int quantity = (int)nudQuantity.Value;
+                string sellerID = dgvProducts.CurrentRow.Cells[7].Value.ToString();
+                Console.WriteLine(sellerID);
                 Console.WriteLine("khoa beo 3");
 
                 // Lấy email người dùng từ session (hoặc biến toàn cục)

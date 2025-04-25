@@ -200,7 +200,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.richTextBox1);
-            this.panel1.Location = new System.Drawing.Point(30, 404);
+            this.panel1.Location = new System.Drawing.Point(38, 325);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(641, 226);
             this.panel1.TabIndex = 24;

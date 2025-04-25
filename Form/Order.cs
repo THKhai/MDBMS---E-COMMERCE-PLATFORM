@@ -61,59 +61,6 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             header.TextAlign = ContentAlignment.MiddleCenter;
             header.Location = new Point(0, 8);
             
-            int stt = 1;
-
-            //flowLayoutPanel1.Controls.Clear();  // Clear các control cũ trước khi load mới
-
-            /*foreach (BsonDocument item in cartItems)
-            {
-                //Console.WriteLine(item.ToString());
-                
-                // Tạo panel cho từng dòng
-                var itemPanel = new Panel();
-                itemPanel.Width = flowLayoutPanel1.Width - 30;
-                itemPanel.Height = 30;
-                itemPanel.Margin = new Padding(1);
-
-                // Label số thứ tự
-                var lblStt = new Label();
-                lblStt.BackColor = Color.Transparent;
-                lblStt.Text = stt.ToString();
-                lblStt.Width = 20;
-                lblStt.Location = new Point(10, 7);
-                stt++;
-                
-                // Label tên sản phẩm
-                var lblName = new Label();
-                lblName.BackColor = Color.Transparent;
-                lblName.Text = item.GetValue("name").ToString();
-                lblName.Width = 200;
-                lblName.Location = new Point(30, 7);
-                
-                // Label tên sản phẩm
-                var lblQuantity = new Label();
-                lblQuantity.BackColor = Color.Transparent;
-                lblQuantity.Text = item.GetValue("quantity").ToString();
-                lblQuantity.Width = 200;
-                lblQuantity.Location = new Point(flowLayoutPanel1.Width - 80, 7);
-                
-                // Label giá sản phẩm
-                var lblPrice = new Label();
-                lblPrice.BackColor = Color.Transparent;
-                int itemPrice = item.GetValue("price").ToInt32();
-                lblPrice.Text = totalPrice.ToString("N0") + "đ";
-                lblPrice.Width = 200;
-                lblPrice.Location = new Point(flowLayoutPanel1.Width - 50, 7);
-                
-                itemPanel.Controls.Add(lblStt);
-                itemPanel.Controls.Add(lblName);
-                itemPanel.Controls.Add(lblQuantity);
-                itemPanel.Controls.Add(lblPrice);
-                
-                // Thêm vào flowLayoutPanelCart
-                flowLayoutPanel1.Controls.Add(itemPanel);
-            }*/
-            
             //Ràng buộc Input
             textBox2.KeyPress += textBox2_KeyPress;
             textBox4.KeyPress += textBox4_KeyPress;
@@ -281,6 +228,8 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 { "CustomerID", userId },
                 { "OrderItems", new BsonArray(orderItems) },
                 { "TotalPrice", totalPrice },
+                { "Address", textBox1.Text },
+                { "Note", richTextBox1.Text },
                 { "PaymentMethod", paymentMethod },
                 { "Status", "Pending" },
                 { "created_at", DateTime.UtcNow },
