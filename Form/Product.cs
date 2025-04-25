@@ -86,8 +86,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 
                 if (sale == null)
                 {
-                    // Handle the case where 'sale' is either null or an empty field.
-                    sale = new BsonDocument(); // Default empty document
+                    sale = new BsonDocument();
                 }
                 decimal salePercent = sale.Contains("percent") ? sale["percent"].ToDecimal() : 0;
                 DateTime saleStartDate = sale.Contains("start_date") ? sale["start_date"].ToUniversalTime() : DateTime.MinValue;
