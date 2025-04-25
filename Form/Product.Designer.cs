@@ -71,12 +71,14 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             this.dgvProducts.AllowUserToDeleteRows = false;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.ID, this.colProductName, this.colCategory, this.colPrice, this.colSize, this.colColor, this.colBrand, this.colMaterial, this.colWarranty });
-            this.dgvProducts.Location = new System.Drawing.Point(45, 42);
+            this.dgvProducts.Location = new System.Drawing.Point(45, 34);
             this.dgvProducts.Margin = new System.Windows.Forms.Padding(4);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.ReadOnly = true;
-            this.dgvProducts.Size = new System.Drawing.Size(977, 245);
+            this.dgvProducts.RowHeadersWidth = 50;
+            this.dgvProducts.Size = new System.Drawing.Size(978, 253);
             this.dgvProducts.TabIndex = 0;
+            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick_1);
             // 
             // ID
             // 
@@ -90,56 +92,52 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             this.colProductName.HeaderText = "Tên sản phẩm";
             this.colProductName.Name = "colProductName";
             this.colProductName.ReadOnly = true;
-            this.colProductName.Width = 120;
+            this.colProductName.Width = 140;
             // 
             // colCategory
             // 
             this.colCategory.HeaderText = "Loại sản phẩm";
             this.colCategory.Name = "colCategory";
             this.colCategory.ReadOnly = true;
-            this.colCategory.Width = 120;
+            this.colCategory.Width = 150;
             // 
             // colPrice
             // 
             this.colPrice.HeaderText = "Giá tiền";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
-            this.colPrice.Width = 80;
             // 
             // colSize
             // 
             this.colSize.HeaderText = "Size";
             this.colSize.Name = "colSize";
             this.colSize.ReadOnly = true;
-            this.colSize.Width = 50;
+            this.colSize.Width = 80;
             // 
             // colColor
             // 
             this.colColor.HeaderText = "Màu sắc";
             this.colColor.Name = "colColor";
             this.colColor.ReadOnly = true;
-            this.colColor.Width = 80;
             // 
             // colBrand
             // 
             this.colBrand.HeaderText = "Tên hãng";
             this.colBrand.Name = "colBrand";
             this.colBrand.ReadOnly = true;
-            this.colBrand.Width = 80;
             // 
             // colMaterial
             // 
             this.colMaterial.HeaderText = "Chất liệu";
             this.colMaterial.Name = "colMaterial";
             this.colMaterial.ReadOnly = true;
-            this.colMaterial.Width = 80;
             // 
             // colWarranty
             // 
             this.colWarranty.HeaderText = "Thời hạn bảo hành";
             this.colWarranty.Name = "colWarranty";
             this.colWarranty.ReadOnly = true;
-            this.colWarranty.Width = 80;
+            this.colWarranty.Width = 160;
             // 
             // Product
             // 
