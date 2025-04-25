@@ -79,3 +79,25 @@ services:
       retries: 3
       start_period: 10s
 
+  couchdb:
+    image: couchdb:latest
+    ports:
+      - "5984:5984"
+    container_name: couchdb_container
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=admin
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    volumes:
+      - ./Repository/data_base_log/couchdb_data:/opt/couchdb/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5984/_up" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
