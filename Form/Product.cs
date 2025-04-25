@@ -79,6 +79,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 string stock = product.GetValue("stock", 0).ToString();
                 string description = product.GetValue("description", "").ToString();
                 // Lấy các thuộc tính sản phẩm
+                string sellerID = product.GetValue("seller_id", "").ToString();
                 BsonDocument sale = product.GetValue("sale", new BsonDocument()).AsBsonDocument;
                 decimal salePercent = sale.Contains("percent") ? sale["percent"].ToDecimal() : 0;
                 DateTime saleStartDate = sale.Contains("start_date") ? sale["start_date"].ToUniversalTime() : DateTime.MinValue;
@@ -114,7 +115,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 string name = dgvProducts.CurrentRow.Cells[1].Value.ToString();
                 int price = Convert.ToInt32(dgvProducts.CurrentRow.Cells[3].Value);
                 int quantity = (int)nudQuantity.Value;
-                string sellerID = dgvProducts.CurrentRow.Cells[7].Value.ToString();
+                string sellerID = dgvProducts.CurrentRow.Cells[10].Value.ToString();
                 Console.WriteLine(sellerID);
                 Console.WriteLine("khoa beo 3");
 
@@ -135,7 +136,12 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                         var cartKey = "cart:" + userId.ToString();
 
                         // Thêm sản phẩm vào giỏ hàng trong Redis
-                        _redisDatabase.HashIncrement(cartKey, id, quantity);
+                        var productInfo = new BsonDocument
+                        {
+                            { "sellerId", sellerID },
+                            { "quantity", quantity }
+                        };
+                        _redisDatabase.HashSet(cartKey, id, productInfo.ToString());
 
                         MessageBox.Show($"Đã thêm: {name} x{quantity} = {price * quantity:N0}đ", 
                             "Thêm vào giỏ hàng", MessageBoxButtons.OK, MessageBoxIcon.Information);

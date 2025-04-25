@@ -208,18 +208,28 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             List<BsonDocument> orderItems = new List<BsonDocument>();
 
             var cartItems = _redisDatabase.HashGetAll(cartKey);
-            
+
             foreach (var item in cartItems)
             {
-                string productId = item.Name;
-                int quantity = (int)item.Value;
+                string productInfoJson = item.Value;
+    
+                // Chuyển chuỗi JSON về BsonDocument
+                BsonDocument productInfo = BsonDocument.Parse(productInfoJson);
+
+                // Lấy các trường từ BsonDocument
+                string productId = item.Name;  // productId là field trong Hash
+                string sellerId = productInfo["sellerId"].AsString;
+                int quantity = productInfo["quantity"].AsInt32;
                 
                 var orderItemDocument = new BsonDocument
                 {
                     { "ProductID", productId },
+                    { "SellerID", sellerId },
                     { "Quantity", quantity }
                 };
     
+                Console.WriteLine($"Seller ID: {sellerId}, Quantity: {quantity}");
+
                 // Thêm vào danh sách orderItems
                 orderItems.Add(orderItemDocument);
             }

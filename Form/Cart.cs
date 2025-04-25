@@ -82,8 +82,15 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 
             foreach (var item in cartItems)
             {
-                string productId = item.Name;
-                int quantity = (int)item.Value;
+                string productInfoJson = item.Value;
+    
+                // Chuyển chuỗi JSON về BsonDocument
+                BsonDocument productInfo = BsonDocument.Parse(productInfoJson);
+
+                // Lấy các trường từ BsonDocument
+                string productId = item.Name;  // productId là field trong Hash
+                string sellerId = productInfo["sellerId"].AsString;
+                int quantity = productInfo["quantity"].AsInt32;
 
                 BsonDocument itemInfo = GetProduct(productId, quantity);
                 int price = itemInfo.GetValue("price", 0).ToInt32();
@@ -145,8 +152,14 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 
             foreach (var item in cartItems)
             {
-                string productId = item.Name;
-                int quantity = (int)item.Value;
+                string productInfoJson = item.Value;
+
+                BsonDocument productInfo = BsonDocument.Parse(productInfoJson);
+
+                // Lấy các trường từ BsonDocument
+                string productId = item.Name;  // productId là field trong Hash
+                string sellerId = productInfo["sellerId"].AsString;
+                int quantity = productInfo["quantity"].AsInt32;
 
                 BsonDocument itemInfo = GetProduct(productId, quantity);
                 
@@ -231,8 +244,18 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             int newQuantity = (int)nud.Value;
 
             // Cập nhật lại Redis
-            _redisDatabase.HashSet(cartKey, productId, newQuantity);
+            string cartItem = _redisDatabase.HashGet(cartKey, productId);
 
+            var productInfo = BsonDocument.Parse(cartItem);
+
+            // Cập nhật lại số lượng
+            productInfo["quantity"] = newQuantity;
+
+            Console.WriteLine(productInfo.ToString());
+            // Lưu lại vào Redis
+            _redisDatabase.HashSet(cartKey, productId, productInfo.ToString());
+            
+            
             // Cập nhật lại giá hiển thị
             int newTotalPrice = price * newQuantity;
             lblPrice.Text = newTotalPrice.ToString("N0") + "đ";
