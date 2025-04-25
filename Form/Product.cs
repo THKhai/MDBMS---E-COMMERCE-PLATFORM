@@ -149,9 +149,5 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             }
         }
 
-        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
     }
 }

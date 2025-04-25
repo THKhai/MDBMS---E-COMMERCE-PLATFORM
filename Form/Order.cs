@@ -160,6 +160,7 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             return null;
         }
         
+        
         private void Order_Load(object sender, EventArgs e)
         {
             

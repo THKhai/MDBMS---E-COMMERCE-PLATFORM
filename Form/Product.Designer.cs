@@ -78,7 +78,6 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
             this.dgvProducts.RowHeadersWidth = 50;
             this.dgvProducts.Size = new System.Drawing.Size(978, 253);
             this.dgvProducts.TabIndex = 0;
-            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick_1);
             // 
             // ID
             // 
