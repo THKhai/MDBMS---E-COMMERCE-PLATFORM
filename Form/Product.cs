@@ -75,24 +75,29 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
 
                 string name = product.GetValue("name", "").AsString;
                 string category = product.GetValue("category", "").AsString;
-                string price = product.GetValue("price", 0).ToString();
-
+                int price = product.GetValue("price", 0).ToInt32();
+                string stock = product.GetValue("stock", 0).ToString();
+                string description = product.GetValue("description", "").ToString();
                 // Lấy các thuộc tính sản phẩm
-                BsonDocument attributes = product.GetValue("attributes", new BsonDocument()).AsBsonDocument;
+                BsonDocument sale = product.GetValue("sale", new BsonDocument()).AsBsonDocument;
+                decimal salePercent = sale.Contains("percent") ? sale["percent"].ToDecimal() : 0;
+                DateTime saleStartDate = sale.Contains("start_date") ? sale["start_date"].ToUniversalTime() : DateTime.MinValue;
+                DateTime saleEndDate = sale.Contains("end_date") ? sale["end_date"].ToUniversalTime() : DateTime.MaxValue;
+                // Kiểm tra xem giảm giá còn hiệu lực hay không
+                string sellerId = product.GetValue("seller_id", "").ToString();
+                
+                var sellerFilter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(sellerId));
+                var seller = _customerCollection.Find(sellerFilter).FirstOrDefault();
+                string sellerName = seller != null ? seller["Seller_profile"]["Name"].ToString() : "Không xác định";
+                
+                decimal finalPrice = price; // Nếu không có sale, giá giữ nguyên
+                if (salePercent > 0 && DateTime.UtcNow >= saleStartDate && DateTime.UtcNow <= saleEndDate)
+                {
+                    finalPrice = price - (price * salePercent / 100); // Tính giá sau giảm
+                }
 
-                // Khởi tạo danh sách các cột (attribute) để điền vào DataGridView
-                string size = attributes.Contains("size") ? attributes["size"].ToString() : "";
-                string color = attributes.Contains("color") ? attributes["color"].ToString() : "";
-                string brand = attributes.Contains("brand") ? attributes["brand"].ToString() : "";
-                string material = attributes.Contains("material") ? attributes["material"].ToString() : "";
-                string warranty = attributes.Contains("warranty") ? attributes["warranty"].ToString() : "";
-                // string cpu = attributes.Contains("cpu") ? attributes["cpu"].ToString() : "";
-                // string ram = attributes.Contains("ram") ? attributes["ram"].ToString() : "";
-                // string storage = attributes.Contains("storage") ? attributes["storage"].ToString() : "";
-
-                // Thêm dòng vào DataGridView với các cột attribute
-                dgvProducts.Rows.Add(id, name, category, price, size, color, material, brand, warranty);
-                //dgvProducts.Columns["id"].Visible = false;
+                // Hiển thị các thông tin vào DataGridView
+                dgvProducts.Rows.Add(id, name, category, finalPrice, stock, description, salePercent, saleStartDate.ToString(), saleEndDate.ToString(), sellerName, sellerID);
             }
 
             dgvProducts.ClearSelection();
