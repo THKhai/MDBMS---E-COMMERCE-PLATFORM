@@ -80,7 +80,15 @@ namespace MDBMS___E_COMMERCE_PLATFORM.Form
                 string description = product.GetValue("description", "").ToString();
                 // Lấy các thuộc tính sản phẩm
                 string sellerID = product.GetValue("seller_id", "").ToString();
-                BsonDocument sale = product.GetValue("sale", new BsonDocument()).AsBsonDocument;
+                //BsonDocument sale = product.GetValue("sale", new BsonDocument()).AsBsonDocument;
+                
+                BsonDocument sale = product.GetValue("sale", null) as BsonDocument;
+
+                if (sale == null)
+                {
+                    // Handle the case where 'sale' is either null or an empty field.
+                    sale = new BsonDocument(); // Default empty document
+                }
                 decimal salePercent = sale.Contains("percent") ? sale["percent"].ToDecimal() : 0;
                 DateTime saleStartDate = sale.Contains("start_date") ? sale["start_date"].ToUniversalTime() : DateTime.MinValue;
                 DateTime saleEndDate = sale.Contains("end_date") ? sale["end_date"].ToUniversalTime() : DateTime.MaxValue;
